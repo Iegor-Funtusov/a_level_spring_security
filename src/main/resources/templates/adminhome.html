@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+      
+      <head>
+        <title>Admin Home</title>
+    </head>
+    <body>
+    	<div layout:fragment="content">
+	        <p>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</p>
+	        <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+			<br>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Messages
+				</div>
+
+				<table class="table table-borderless table-sm">
+					<tr>
+						<th>Id</th>
+						<th>Email</th>
+						<th>message</th>
+					</tr>
+					<tr th:each="m : ${msgs}">
+						<td th:text="${m.user.id}"></td>
+						<td th:text="${m.user.email}"></td>
+						<td th:text="${m.content}"></td>
+					</tr>
+				</table>
+			</div>
+    	</div>
+    </body>
+    
+</html>
